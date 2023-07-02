@@ -9,6 +9,7 @@ import Foundation
 
 class FirstViewControllerModel {
     
+    // FirstViewControllerModelDelegateとProvidesCountNumの参照を保持
     var delegate: FirstViewControllerModelDelegate!
     var countNumProvider: ProvidesCountNum?
     var cells: [Cell]
@@ -31,12 +32,14 @@ class FirstViewControllerModel {
         delegate?.modelDidUpdateData(self)
     }
     
-    // Cellの内容を変更するメソッドを追加
+    //countNumProviderからカウント数を取得,それに基づいて新しいセルのデータを作成します。
     func changeCellData() {
         guard let countNum = countNumProvider?.countNum else { return }
         cells = [
-            Cell(title: "新しいタイトル\(countNum)", detail: "新しい詳細\(countNum)"),
-            Cell(title: "新しいタイトル\(countNum+1)", detail: "新しい詳細\(countNum+1)"),
+            Cell(title: "新しいタイトル\(countNum)",
+                 detail: "新しい詳細\(countNum)"),
+            Cell(title: "新しいタイトル\(countNum+1)",
+                 detail: "新しい詳細\(countNum+1)"),
             // 以降、新しいデータを追加...
         ]
         
@@ -44,11 +47,13 @@ class FirstViewControllerModel {
         delegate?.modelDidUpdateData(self)
     }
     
+    // ボタンを判定する構造体
     enum ButtonType {
         case tableButton
         case viewButton
     }
     
+    // 押されたボタンによって処理を分岐
     func buttonTapped(_ buttonType: ButtonType) {
         switch buttonType {
         case .tableButton:
@@ -61,6 +66,7 @@ class FirstViewControllerModel {
         }
     }
     
+    //
     func updateCell(at index: Int, with cell: Cell) {
         guard cells.indices.contains(index) else { return }
         cells[index] = cell

@@ -10,21 +10,23 @@ import UIKit
 class TableViewCell: UITableViewCell {
     
     static let reuseIdentifier = "TableViewCell"
-        @IBOutlet weak var title: UILabel!
-        @IBOutlet weak var detail: UILabel!
+    
+    @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var detail: UILabel!
 
-        required init?(coder aDecoder: NSCoder) {
-            super.init(coder: aDecoder)
-        }
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
 
-        static func nib() -> UINib {
-            return UINib(nibName: TableViewCell.reuseIdentifier, bundle: nil)
-        }
+    static func nib() -> UINib {
+        return UINib(nibName: TableViewCell.reuseIdentifier, bundle: nil)
+    }
 
-        func bind(title: String, detail: String) {
-            self.title.text = title
-            self.detail.text = detail
-        }
+    // セルのタイトルと詳細を設定するメソッドです。
+    func bind(title: String, detail: String) {
+        self.title.text = title
+        self.detail.text = detail
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

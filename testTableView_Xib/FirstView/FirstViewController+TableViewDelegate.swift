@@ -10,11 +10,15 @@ import UIKit
 
 extension FirstViewController: UITableViewDataSource, UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    // テーブルビューのセクション内の行数をモデルから取得します。
+    func tableView(_ tableView: UITableView,
+                   numberOfRowsInSection section: Int) -> Int {
         return model.cells.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    // 各行のセルを設定します。セルの内容はモデルから取得します。
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.reuseIdentifier, for: indexPath) as? TableViewCell else {
             fatalError("The dequeued cell is not an instance of TableViewCell.")
         }
@@ -25,6 +29,7 @@ extension FirstViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+    // モデルがデータを更新したときに呼ばれるメソッドです。テーブルビューを再ロードします。
     func modelDidUpdateData(_ model: FirstViewControllerModel) {
        DispatchQueue.main.async {
            self.tableView.reloadData()

@@ -9,7 +9,9 @@ import UIKit
 
 class FirstViewController: UIViewController,ProvidesCountNum {
     
+    // FirstViewControllerModel型のモデルを保持します。
     var model: FirstViewControllerModel!
+    // 値が変更されたときにモデルのchangeCellDataメソッドを呼び出す
     var countNum: Int = 0 {
         didSet {
             model.changeCellData()
@@ -18,10 +20,8 @@ class FirstViewController: UIViewController,ProvidesCountNum {
         
     @IBOutlet weak var LabelView: UIView!
     @IBOutlet weak var tableView: UITableView!
-
     
-   
-    
+    // モデルのデリゲートとcountNumProviderにselfを設定
     init(model: FirstViewControllerModel!) {
         super.init(nibName: nil, bundle: nil)
         self.model = model
@@ -38,11 +38,12 @@ class FirstViewController: UIViewController,ProvidesCountNum {
         setupTableView()
     }
     
-    
+    //カウント数を増やし、モデルのbuttonTappedメソッドを呼び出します。
     @IBAction func tableButtonTapped(_ sender: Any) {
         countNum += 1
         model.buttonTapped(.tableButton)
     }
+    
     
     @IBAction func viewButtonTapped(_ sender: Any) {
         model.buttonTapped(.viewButton)
